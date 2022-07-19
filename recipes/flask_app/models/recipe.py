@@ -1,5 +1,5 @@
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask_app import app, flash
+from flask_app import app, flash, session
 from pprint import pprint
 from datetime import date, datetime
 
@@ -75,4 +75,3 @@ class Recipe:
             is_valid = False
 
         return is_valid
-[]

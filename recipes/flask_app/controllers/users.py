@@ -29,6 +29,9 @@ def insert_user():
 
 @app.route("/user/dashboard")
 def user_dashboard():
+    if 'user_id' not in session:
+        return redirect("/")
+
     recipes = recipe_module.Recipe.select_all_recipes()
 
     users = []

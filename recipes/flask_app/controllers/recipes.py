@@ -4,10 +4,16 @@ from datetime import date, datetime
 
 @app.route("/recipe/new")
 def recipe_new():
+    if 'user_id' not in session:
+        return redirect("/")
+
     return render_template("recipe_add.html")
 
 @app.route("/recipe/insert", methods=['POST'])
 def recipe_insert():
+    if 'user_id' not in session:
+        return redirect("/")
+
     if not recipe_module.Recipe.validate_recipe(request.form):
         return redirect("/recipe/new")
 
@@ -24,6 +30,9 @@ def recipe_insert():
 
 @app.route("/recipes/<int:id>")
 def view_recipe(id):
+    if 'user_id' not in session:
+        return redirect("/")
+
     data = {
         'id': id
     }
@@ -34,6 +43,9 @@ def view_recipe(id):
 
 @app.route("/recipes/edit/<int:id>")
 def recipe_edit(id):
+    if 'user_id' not in session:
+        return redirect("/")
+
     data = {
         'id': id
     }
@@ -42,6 +54,9 @@ def recipe_edit(id):
 
 @app.route("/recipes/update", methods=['POST'])
 def edit_recipe():
+    if 'user_id' not in session:
+        return redirect("/")
+
     if not recipe_module.Recipe.validate_recipe(request.form):
         return redirect(f"/recipes/edit/{request.form['id']}")
 
@@ -58,6 +73,9 @@ def edit_recipe():
 
 @app.route("/recipes/delete/<int:id>")
 def recipe_delete(id):
+    if 'user_id' not in session:
+        return redirect("/")
+        
     data = {
         'id': id
     }

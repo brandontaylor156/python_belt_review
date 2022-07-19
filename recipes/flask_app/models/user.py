@@ -83,7 +83,6 @@ class User:
             user.recipes.append(recipe.Recipe(recipe_dict))
         return user
         
-    
     @staticmethod
     def validate_user(user):
         is_valid = True
