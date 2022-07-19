@@ -75,6 +75,7 @@ class User:
                 'name': result['name'], 
                 'under': result['under'],
                 'description': result['description'],
+                'date_made': result['date_made'],
                 'created_at': result['recipes.created_at'], 
                 'updated_at': result['recipes.updated_at'],
                 'user_id': result['user_id']

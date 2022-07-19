@@ -26,16 +26,16 @@
       </tr>
     </thead>
     <tbody>
-      {% for user, recipe in recipes.items() %}
+      {% for recipe_index in range(recipes|length) %}
       <tr>
-        <td>{{recipe.name}}</td>
-        <td>{{recipe.under}}</td>
-        <td>{{user.first_name}}</td>
+        <td>{{recipes[recipe_index].name}}</td>
+        <td>{{recipes[recipe_index].under}}</td>
+        <td>{{users[recipe_index].first_name}}</td>
         <td>
-          <a href="/recipes/{{recipe.id}}">View Recipe</a>
-          {% if recipe.user_id == session['user_id'] %}
-           | <a href="/recipes/edit/{{recipe.id}}">Edit</a>
-           | <a href="/recipes/delete/{{recipe.id}}">Delete</a>
+          <a href="/recipes/{{recipes[recipe_index].id}}">View Recipe</a>
+          {% if recipes[recipe_index].user_id == session['user_id'] %}
+           | <a href="/recipes/edit/{{recipes[recipe_index].id}}">Edit</a>
+           | <a href="/recipes/delete/{{recipes[recipe_index].id}}">Delete</a>
           {% endif %}
         </td>
         

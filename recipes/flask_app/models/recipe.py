@@ -12,6 +12,7 @@ class Recipe:
         self.under = data['under']
         self.description = data['description']
         self.instructions = data['instructions']
+        self.date_made = data['date_made']
         self.user_id = data['user_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -24,7 +25,7 @@ class Recipe:
 
     @classmethod
     def select_all_recipes(cls):
-        query = "SELECT * FROM recipes;"
+        query = "SELECT * FROM recipes ORDER BY name;"
         results = connectToMySQL(DATABASE).query_db(query)
         recipes = []
         for result in results:
@@ -33,13 +34,13 @@ class Recipe:
 
     @classmethod
     def insert_recipe(cls, data):
-        query = "INSERT INTO recipes (name, under, description, instructions, user_id, created_at) VALUES (%(name)s, %(under)s, %(description)s, %(instructions)s, %(user_id)s, %(created_at)s);"
+        query = "INSERT INTO recipes (name, under, description, instructions, user_id, date_made) VALUES (%(name)s, %(under)s, %(description)s, %(instructions)s, %(user_id)s, %(date_made)s);"
         result = connectToMySQL(DATABASE).query_db(query, data)
         return result
 
     @classmethod
     def update_recipe(cls, data):
-        query = "UPDATE recipes SET name = %(name)s, description = %(description)s, instructions = %(instructions)s, under = %(under)s, created_at = %(created_at)s WHERE recipes.id = %(id)s;"
+        query = "UPDATE recipes SET name = %(name)s, description = %(description)s, instructions = %(instructions)s, under = %(under)s, date_made = %(date_made)s WHERE recipes.id = %(id)s;"
         result = connectToMySQL(DATABASE).query_db(query, data)
         return
 
@@ -65,12 +66,12 @@ class Recipe:
             flash("Instructions must be at least 3 characters long.", 'instructions')
             is_valid = False
 
-        if recipe['created_at'] == "":
-            flash("Date required", 'created_at')
+        if recipe['date_made'] == "":
+            flash("Date required", 'date_made')
             is_valid = False
             return is_valid
-        if (datetime.strptime(recipe['created_at'], '%Y-%m-%d').date()) > date.today():
-            flash("Date invalid.", 'created_at')
+        if (datetime.strptime(recipe['date_made'], '%Y-%m-%d').date()) > date.today():
+            flash("Date invalid.", 'date_made')
             is_valid = False
 
         return is_valid

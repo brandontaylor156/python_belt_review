@@ -55,11 +55,11 @@
         </div>
         <div class="col d-flex flex-column gap-3">
             <div class="form-group">
-                <label for="created_at">Date cooked/made:</label>
-                <input type="date" class="form-control" id="created_at" name="created_at">
+                <label for="date_made">Date cooked/made:</label>
+                <input type="date" class="form-control" id="date_made" name="date_made">
                 {% if messages %}
                 {% for category, message in messages %}
-                    {% if category == 'created_at' %}
+                    {% if category == 'date_made' %}
                     <span class="form-text text-danger">{{message}}</span>
                     {% endif %}
                 {% endfor %}

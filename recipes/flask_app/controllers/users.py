@@ -31,16 +31,15 @@ def insert_user():
 def user_dashboard():
     recipes = recipe_module.Recipe.select_all_recipes()
 
-    recipe_dict = {}
-
+    users = []
+    
     for recipe in recipes:
         data = {
             'id': recipe.user_id
         }
-        user = user_module.User.select_user_by_user_id(data)
-        recipe_dict[user]=recipe
+        users.append(user_module.User.select_user_by_user_id(data))
 
-    return render_template("dashboard.html", recipes=recipe_dict)
+    return render_template("dashboard.html", recipes=recipes, users=users)
 
 @app.route("/user/login", methods=['POST'])
 def login_user():

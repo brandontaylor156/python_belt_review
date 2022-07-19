@@ -16,7 +16,7 @@ def recipe_insert():
         'description': request.form['description'],
         'instructions': request.form['instructions'],
         'under': request.form['under'],
-        'created_at': request.form['created_at'],
+        'date_made': request.form['date_made'],
         'user_id': session['user_id']
     }
     new_recipe = recipe_module.Recipe.insert_recipe(data)
@@ -51,7 +51,7 @@ def edit_recipe():
         'description': request.form['description'],
         'instructions': request.form['instructions'],
         'under': request.form['under'],
-        'created_at': request.form['created_at'],
+        'date_made': request.form['date_made'],
     }
     recipe_module.Recipe.update_recipe(data)
     return redirect("/user/dashboard")
